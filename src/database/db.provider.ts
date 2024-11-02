@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { UserEntity } from "src/modules/user/entities/user.entity";
 import { EventEntity } from "src/modules/event/entities/event.entity";
+import { EventReqEntity } from "src/modules/event-req/entities/event-req.entity";
 export const databaseProviders = [
   {
     provide: "SEQUELIZE",
@@ -13,7 +14,7 @@ export const databaseProviders = [
         password: "password",
         database: "meetlife",
       });
-      sequelize.addModels([UserEntity, EventEntity]);
+      sequelize.addModels([UserEntity, EventEntity, EventReqEntity]);
       await sequelize.sync({ force: false });
       return sequelize;
     },

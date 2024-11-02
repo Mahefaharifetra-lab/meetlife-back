@@ -5,7 +5,8 @@ import { AppService } from "./app.service";
 import { DatabaseModule } from "src/database/db.module";
 import { UserModule } from "./modules/user/user.module";
 import { EventModule } from "./modules/event/event.module";
-import { ChatModule } from './modules/chat/chat.module';
+import { ChatModule } from "./modules/chat/chat.module";
+import { EventReqModule } from "./modules/event-req/event-req.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ChatModule } from './modules/chat/chat.module';
     UserModule,
     EventModule,
     ChatModule,
+    EventReqModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { CreateEventDto } from "./dto/create-event.dto";
 import { EventEntity } from "./entities/event.entity";
 import { UserEntity } from "../user/entities/user.entity";
+import { EventReqEntity } from "../event-req/entities/event-req.entity";
 
 @Injectable()
 export class EventService {
@@ -34,6 +35,17 @@ export class EventService {
   async getAllEvents(): Promise<CreateEventDto[]> {
     try {
       return await EventEntity.findAll({ include: [UserEntity] });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllUserEvents(userId: number): Promise<CreateEventDto[]> {
+    try {
+      return await EventEntity.findAll({
+        where: [{ userId: userId }],
+        include: [EventReqEntity],
+      });
     } catch (error) {
       throw error;
     }

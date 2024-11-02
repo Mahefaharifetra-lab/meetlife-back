@@ -1,3 +1,4 @@
+import { CreateEventReqDto } from "src/modules/event-req/dto/create-event-req.dto";
 import { CreateUserDto } from "src/modules/user/dto/create-user.dto";
 
 export class CreateEventDto {
@@ -18,6 +19,7 @@ export class CreateEventDto {
 
   userId: number;
   user?: CreateUserDto;
+  req?: CreateEventReqDto[];
   createdAt?: number;
   updatedAt?: number;
 }

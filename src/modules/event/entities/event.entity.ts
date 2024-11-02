@@ -8,7 +8,10 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from "sequelize-typescript";
+import { CreateEventReqDto } from "src/modules/event-req/dto/create-event-req.dto";
+import { EventReqEntity } from "src/modules/event-req/entities/event-req.entity";
 import { CreateEventDto } from "src/modules/event/dto/create-event.dto";
 import { CreateUserDto } from "src/modules/user/dto/create-user.dto";
 import { UserEntity } from "src/modules/user/entities/user.entity";
@@ -63,6 +66,9 @@ export class EventEntity
 
   @Column
   category: string;
+
+  @HasMany(() => EventReqEntity, "eventId")
+  req?: CreateEventReqDto[];
 
   @ForeignKey(() => UserEntity)
   userId: number;
