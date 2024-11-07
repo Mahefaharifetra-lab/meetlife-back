@@ -4,11 +4,11 @@ import { CreateUserDto, GENDER } from "../dto/create-user.dto";
 import { genSaltSync, hashSync } from "bcrypt";
 import { UserEntity } from "../entities/user.entity";
 import { StringService } from "src/services/string.service";
-import { EmailApi } from "src/services/mail.service";
 import { API_REGISTER_ERROR, API_SEARCH_ERROR } from "src/enums/error.enum";
-
+import { EmailApi } from "src/services/mail.service";
 @Injectable()
 export class RegisterService {
+  private mailApi = new EmailApi();
   async registeUser(params: UpdateUserDto): Promise<CreateUserDto> {
     const salt = genSaltSync(10);
     const crytedPassword = hashSync(params.password, salt);
@@ -23,9 +23,9 @@ export class RegisterService {
         updatedAt: Date.now() / 1000,
       };
 
-      // const api = new EmailApi();
-      // await api.sendMail(params.pseudo, randCode, params.email);
-      return await UserEntity.create(temp);
+      const result = await UserEntity.create(temp);
+      this.mailApi.sendVerificationEmail(result);
+      return result;
     } catch (e) {
       console.log(e);
       let tmpError: any = e;
