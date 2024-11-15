@@ -116,7 +116,7 @@ export class EmailApi {
         <body>
           <div class="container">
             <div class="header">
-              <h1>Bonjour ${user.pseudo},</h1>
+              <h1>Bonjour ${user.fullName},</h1>
             </div>
             <p>Nous avons reçu une demande de vérification de votre compte MeetLife. Pour confirmer votre identité et sécuriser votre compte, veuillez entrer le code de vérification suivant sur notre site :</p>
             <div class="code">

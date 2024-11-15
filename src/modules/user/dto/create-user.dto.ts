@@ -2,8 +2,8 @@ import { CreateEventDto } from "src/modules/event/dto/create-event.dto";
 
 export class CreateUserDto {
   id?: number;
-  fullName?: string;
-  pseudo: string;
+  fullName: string;
+  pseudo?: string;
   phone?: string;
   email: string;
   password: string;

@@ -15,7 +15,7 @@ export class RegisterService {
     const randCode = StringService.RandUpString();
     try {
       const temp: CreateUserDto = {
-        pseudo: params.pseudo,
+        fullName: params.fullName,
         email: params.email,
         password: crytedPassword,
         verificationCode: randCode,
@@ -53,8 +53,9 @@ export class RegisterService {
         { verificationCode: randCode },
         { where: [{ id: id }] }
       );
-
-      return await UserEntity.findByPk(id);
+      const result = await UserEntity.findByPk(id);
+      this.mailApi.sendVerificationEmail(result);
+      return result;
     } catch (error) {
       throw error as string;
     }
